@@ -446,5 +446,29 @@ for (var i = 0; i < 5; i++) {
     Because i is initalized with "var", it will be scoped to the loop and its value will increment through the loops before the setTimeout callback is called. When setTimeout runs, i will be 5.
 
 What is NaN? What is its type? How can you reliably test if a value is equal to NaN?
-* NaN represents "not a number", which results from operations that couldn't be performed because of mixed data types. Its type is actually a `Number`. To reliably test is a value is NaN, using `Number.isNan()` is helpful.
+* NaN represents "not a number", which results from operations that couldn't be performed because of mixed data types. Its type is actually a `Number`. To reliably test is a value is NaN, using `Number.isNaN()` is helpful.
+
+What will the following code output and why?
+```
+var b = 1;
+function outer(){
+   	var b = 2
+    function inner(){
+        b++;
+        var b = 3;
+        console.log(b)
+    }
+    inner();
+}
+outer();
+```
+
+* The code above will print `3` because there is a variable "b" scoped to the function inner() which is what is referred to in console.log(). The `b++` operates on b, which due to hoisting, has been declared but not yet initialized a value until the line after. 
+
+Discuss possible ways to write a function isInteger(x) that determines if x is an integer.
+
+* If I were to write a function isInteger(x), I could check the `typeof x` to see if it matches `"number"` while also ensuring that `x % 1 === 0` to make sure that x is a whole integer instead of a float.
+
+How do you clone an object?
+* You can clone an object by using the spread operator if it does not have nested data `{...}` or with `Object.assign({}, objectToClone)`
 
